@@ -4,6 +4,8 @@ import { world } from './world';
 
 export default class Entity extends THREE.Mesh {
 
+  name = ''
+
   constructor() {
     super();
     this.receiveShadow = true;

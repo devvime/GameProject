@@ -1,5 +1,6 @@
 import { Game } from './game';
 import scenes from '../game/setScenes';
+import Debug from './debug';
 
 export default class Engine {
 
@@ -8,7 +9,10 @@ export default class Engine {
     this.game = new Game()
     this.setScene('main');
     this.game.create();
-    this.game.update();
+    this.debug = new Debug(this.game.currentScene.camera, this.game);
+    this.debug.add(this.game.currentScene.camera);
+    this.game.update(this.debug);
+    this.debugSceneObjects();
   }
 
   static getGame() {
@@ -23,6 +27,13 @@ export default class Engine {
       const entity = this.game.currentScene.objects[obj];
       this.game.currentScene.add(entity);
       if (entity.create) entity.create();
+    }
+  }
+
+  debugSceneObjects() {
+    for (const obj of Object.keys(this.game.currentScene.objects)) {
+      const entity = this.game.currentScene.objects[obj];
+      this.debug.add(entity, { label: entity.name });
     }
   }
 

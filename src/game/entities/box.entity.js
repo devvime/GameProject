@@ -4,6 +4,8 @@ import Entity from '../../engine/entity';
 
 export default class Box extends Entity {
 
+  name = 'box';
+
   constructor() {
     super();
 

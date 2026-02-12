@@ -18,9 +18,6 @@ export class Game {
   }
 
   create() {
-    this.debug = new Debug(this.currentScene.camera, this);
-    this.debug.add(this.currentScene.camera);
-
     window.addEventListener('resize', () => {
       this.currentScene.camera.aspect = window.innerWidth / window.innerHeight;
       this.currentScene.camera.updateProjectionMatrix();
@@ -30,10 +27,10 @@ export class Game {
     document.body.appendChild(this.renderer.domElement);
   }
 
-  update() {
+  update(debug) {
     this.renderer.setAnimationLoop(() => {
       world.fixedStep();
-      this.debug.update(this.currentScene);
+      debug.update(this.currentScene);
       const delta = this.clock.getDelta();
 
       this.currentScene.update(delta);

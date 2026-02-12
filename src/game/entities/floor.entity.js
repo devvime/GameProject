@@ -4,6 +4,8 @@ import Entity from '../../engine/entity'
 
 export default class Floor extends Entity {
 
+  name = 'floor';
+
   constructor() {
     super();
 

@@ -13,6 +13,7 @@ export default class Scene extends THREE.Scene {
 
   constructor() {
     super();
+    this.fog = new THREE.Fog(0x5c4740, 20, 100);
     this.setWorld();
     this.camera = camera;
     this.game = Engine.getGame();
