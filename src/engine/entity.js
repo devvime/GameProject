@@ -1,10 +1,12 @@
 import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { world } from './world';
 
 export default class Entity extends THREE.Mesh {
 
   name = ''
+  loader = new GLTFLoader();
 
   constructor() {
     super();

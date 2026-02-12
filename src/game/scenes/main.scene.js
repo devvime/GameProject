@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import Scene from "../../engine/scene";
 import Floor from '../entities/floor.entity';
 import Box from '../entities/box.entity';
+import Robot from '../entities/robot.entity';
 
 export default class MainScene extends Scene {
 
@@ -11,7 +12,8 @@ export default class MainScene extends Scene {
 
   create() {
     this.objects['floor'] = new Floor();
-    this.objects['box'] = new Box();
+    // this.objects['box'] = new Box();
+    this.objects['robot'] = new Robot();
   }
 
   update(dt) { }

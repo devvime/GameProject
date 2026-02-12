@@ -25,6 +25,7 @@ export default class Engine {
 
     for (const obj of Object.keys(this.game.currentScene.objects)) {
       const entity = this.game.currentScene.objects[obj];
+      entity.game = this.game;
       this.game.currentScene.add(entity);
       if (entity.create) entity.create();
     }
