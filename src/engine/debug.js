@@ -23,6 +23,9 @@ export default class Debug {
       }, { grid: false });
       this.cannonDebugger = CannonDebugger(engine.currentScene, world);
       document.body.appendChild(this.stats.dom);
+
+      this.add(engine.currentScene.sun)
+      this.add(engine.currentScene.ambientLight)
     }
   }
 

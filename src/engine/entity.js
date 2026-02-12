@@ -30,6 +30,11 @@ export default class Entity extends THREE.Mesh {
     this.quaternion.copy(this.body.quaternion);
   }
 
+  updateStaticBody() {
+    this.body.position.copy(this.position);
+    this.body.quaternion.copy(this.quaternion);
+  }
+
   create() { }
 
   update(dt) { }

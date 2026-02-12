@@ -7,8 +7,6 @@ export default class MainScene extends Scene {
 
   constructor() {
     super();
-
-    this.camera.position.z = 5;
   }
 
   create() {

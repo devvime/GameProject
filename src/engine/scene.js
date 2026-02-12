@@ -13,14 +13,19 @@ export default class Scene extends THREE.Scene {
 
   constructor() {
     super();
-    this.fog = new THREE.Fog(0x5c4740, 20, 100);
     this.setWorld();
     this.camera = camera;
     this.game = Engine.getGame();
     this.keys = keys;
+
+    this.camera.position.x = -3.35;
+    this.camera.position.y = 4.40;
+    this.camera.position.z = 5.35;
   }
 
   setWorld() {
+    this.fog = new THREE.Fog(0x5c4740, 20, 100);
+
     this.sun.position.set(1, 2, 3);
     this.sun.castShadow = true;
     this.sun.shadow.mapSize.width = 1024;

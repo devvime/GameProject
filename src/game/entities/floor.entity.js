@@ -14,5 +14,9 @@ export default class Floor extends Entity {
     this.addStaticBody(new CANNON.Box(new CANNON.Vec3(2.5, 0.1, 2.5)));
   }
 
+  update(dt) {
+    this.updateStaticBody();
+  }
+
 
 }

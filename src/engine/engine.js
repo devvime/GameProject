@@ -6,7 +6,7 @@ export default class Engine {
 
   constructor() {
     this.scenes = scenes;
-    this.game = new Game()
+    this.game = new Game();
     this.setScene('main');
     this.game.create();
     this.debug = new Debug(this.game.currentScene.camera, this.game);
