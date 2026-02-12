@@ -5,18 +5,17 @@ import Box from '../entities/box.entity';
 
 export default class MainScene extends Scene {
 
-  create() {
+  constructor() {
+    super();
+
     this.camera.position.z = 5;
-
-    this.floor = new Floor();
-    this.add(this.floor);
-
-    this.box = new Box();
-    this.add(this.box);
   }
 
-  update(dt) {
-    this.box.update(dt)
+  create() {
+    this.objects['floor'] = new Floor();
+    this.objects['box'] = new Box();
   }
+
+  update(dt) { }
 
 }

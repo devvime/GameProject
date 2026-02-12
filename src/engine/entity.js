@@ -27,4 +27,8 @@ export default class Entity extends THREE.Mesh {
     this.position.copy(this.body.position);
     this.quaternion.copy(this.body.quaternion);
   }
+
+  create() { }
+
+  update(dt) { }
 }

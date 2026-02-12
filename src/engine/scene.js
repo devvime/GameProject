@@ -9,12 +9,13 @@ export default class Scene extends THREE.Scene {
   sky = new DefaultSky();
   sun = new THREE.DirectionalLight();
   ambientLight = new THREE.AmbientLight();
+  objects = {};
 
   constructor() {
     super();
     this.setWorld();
     this.camera = camera;
-    this.game = Engine.get();
+    this.game = Engine.getGame();
     this.keys = keys;
   }
 
@@ -30,9 +31,5 @@ export default class Scene extends THREE.Scene {
     this.add(this.sun);
     this.add(this.ambientLight);
   }
-
-  create() { }
-
-  update(dt) { }
 
 }

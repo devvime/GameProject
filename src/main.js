@@ -1,3 +1,4 @@
-import { Game } from "./engine/game";
 
-const game = new Game();
+import Engine from "./engine/engine";
+
+const game = new Engine();

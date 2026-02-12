@@ -19,7 +19,7 @@ export default class Box extends Entity {
     this.body.position.set(0, 1, 0);
   }
 
-  update(_delta) {
+  update(dt) {
     this.updateBody();
   }
 
