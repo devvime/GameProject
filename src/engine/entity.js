@@ -1,12 +1,14 @@
 import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { world } from './world';
+import Engine from './engine';
+import { LoadModel } from './loader';
 
 export default class Entity extends THREE.Mesh {
 
   name = ''
-  loader = new GLTFLoader();
+  loadModel = LoadModel;
+  game = Engine.getGame();
 
   constructor() {
     super();

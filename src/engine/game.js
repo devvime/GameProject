@@ -31,15 +31,14 @@ export class Game {
     this.renderer.setAnimationLoop(() => {
       world.fixedStep();
       debug.update(this.currentScene);
-      const delta = this.clock.getDelta();
+      const dt = this.clock.getDelta();
 
-      this.currentScene.update(delta);
       for (const obj of Object.keys(this.currentScene.objects)) {
         const entity = this.currentScene.objects[obj];
-        if (entity.update) entity.update();
+        if (entity.update) entity.update(dt);
       }
 
-      this.currentScene.update(delta);
+      this.currentScene.update(dt);
       this.renderer.render(this.currentScene, this.currentScene.camera);
     });
   }
