@@ -33,6 +33,7 @@ export class Animator {
   }
 
   update(dt) {
+    if (!this.mixer) return;
     this.mixer.update(dt);
   }
 
