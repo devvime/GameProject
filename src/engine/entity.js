@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import Engine from './engine';
 import { LoadModel } from './loader';
 import { world } from './world';
+import { Loading } from './loading';
 
 export default class Entity extends THREE.Mesh {
 
@@ -11,16 +12,11 @@ export default class Entity extends THREE.Mesh {
 
   constructor() {
     super();
+    this.loading = Loading;
     this.receiveShadow = true;
     this.castShadow = true;
     this.isGrounded = true;
-  }
-
-  updateModel(y = 0) {
-    if (!this.model) return;
-    this.model.position.copy(this.position);
-    this.model.quaternion.copy(this.quaternion);
-    this.model.position.y = this.model.position.y - y
+    this.model = undefined;
   }
 
   addBody({
@@ -49,9 +45,16 @@ export default class Entity extends THREE.Mesh {
     });
   }
 
-  updateBody() {
-    this.position.copy(this.body.getPosition());
-    this.quaternion.copy(this.body.getQuaternion());
+  updateBody({ model = false, y = 0 }) {
+    if (model) {
+      if (this.model === undefined) return;
+      this.model.position.copy(this.body.getPosition());
+      this.model.quaternion.copy(this.body.getQuaternion());
+      this.model.position.y = this.model.position.y - y;
+    } else {
+      this.position.copy(this.body.getPosition());
+      this.quaternion.copy(this.body.getQuaternion());
+    }
   }
 
   create() { }

@@ -17,10 +17,12 @@ export default class Soldier extends Entity {
     this.game.currentScene.add(this.model);
     this.animator = new Animator(this.model, animations);
     this.controller = new PlayerController(this);
+
+    this.addBody({ pos: [0, 2, 0], size: [1, 1.5, 1] });
   }
 
   update(dt) {
-    this.updateModel();
+    this.updateBody({ model: true, y: 0.75 });
     if (this.controller) this.controller.update(dt);
   }
 }

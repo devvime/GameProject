@@ -5,26 +5,26 @@ export class PlayerController {
   constructor(player) {
     this.player = player
 
-    this.speed = 11;
-    this.jumpForce = 4;
+    this.speed = 1.3;
+    this.jumpForce = 10;
   }
 
   movement(dt) {
     if (!this.player.isGrounded) return;
     if (keys.w) {
-      this.player.body.velocity.z -= this.speed;
+      this.player.body.position.z -= this.speed * dt;
     }
     if (keys.s) {
-      this.player.body.velocity.z += this.speed;
+      this.player.body.position.z += this.speed * dt;
     }
     if (keys.a) {
-      this.player.body.velocity.x -= this.speed;
+      this.player.body.position.x -= this.speed * dt;
     }
     if (keys.d) {
-      this.player.body.velocity.x += this.speed;
+      this.player.body.position.x += this.speed * dt;
     }
     if (keys.spacebar) {
-      this.player.body.velocity.y += this.jumpForce;
+      this.player.body.position.y += this.jumpForce * dt;
     }
   }
 
@@ -47,7 +47,7 @@ export class PlayerController {
   }
 
   update(dt) {
-    // this.movement(dt);
+    this.movement(dt);
     this.animate(dt);
   }
 

@@ -15,7 +15,7 @@ export default class Floor extends Entity {
   }
 
   update(dt) {
-    this.updateBody();
+    this.updateBody({});
   }
 
 

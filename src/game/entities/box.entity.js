@@ -13,10 +13,12 @@ export default class Box extends Entity {
 
     this.position.set(-3, 3, 0);
     this.addBody({ pos: [-3, 3, 0], size: [1, 1, 1] });
+
+    console.log(this.body)
   }
 
   update(dt) {
-    this.updateBody();
+    this.updateBody({});
   }
 
 
