@@ -1,4 +1,8 @@
 
 import Engine from "./engine/engine";
 
-const game = new Engine();
+import('@dimforge/rapier3d').then(RAPIER => {
+  const gravity = { x: 0.0, y: -9.81, z: 0.0 };
+  window.world = new RAPIER.World(gravity);
+  const game = new Engine();
+});

@@ -1,12 +1,6 @@
 export const settings = {
   debug: true,
   world: {
-    timestep: 1 / 60,
-    iterations: 8,
-    broadphase: 2,
-    worldscale: 1,
-    random: true,
-    info: false,
-    gravity: [0, -9.8, 0]
+    gravity: { x: 0, y: -9.81, z: 0 }
   }
 }

@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 import Engine from './engine';
 import { LoadModel } from './loader';
-import { world } from './world';
 import { Loading } from './loading';
+import * as RAPIER from '@dimforge/rapier3d';
 
 export default class Entity extends THREE.Mesh {
 
@@ -19,42 +19,26 @@ export default class Entity extends THREE.Mesh {
     this.model = undefined;
   }
 
-  addBody({
-    type = 'box',
-    size = [1, 1, 1],
-    pos = [0, 0, 0],
-    rot = [0, 0, 0],
-    move = true,
-    density = 1,
-    friction = 0.2,
-    restitution = 0,
-    belongsTo = 1,
-    collidesWith = 0xffffffff
-  }) {
-    this.body = world.add({
-      type: type, // type of shape : sphere, box, cylinder 
-      size: size, // size of shape
-      pos: pos, // start position in degree
-      rot: rot, // start rotation in degree
-      move: move, // dynamic or statique
-      density: density,
-      friction: friction,
-      restitution: restitution,
-      belongsTo: belongsTo, // The bits of the collision groups to which the shape belongs.
-      collidesWith: collidesWith // The bits of the collision groups with which the shape collides.
-    });
+  addStaticBody(x, y, z) {
+    this.body = window.world.createCollider(RAPIER.ColliderDesc.cuboid(x, y, z));
   }
 
-  updateBody({ model = false, y = 0 }) {
-    if (model) {
-      if (this.model === undefined) return;
-      this.model.position.copy(this.body.getPosition());
-      this.model.quaternion.copy(this.body.getQuaternion());
-      this.model.position.y = this.model.position.y - y;
-    } else {
-      this.position.copy(this.body.getPosition());
-      this.quaternion.copy(this.body.getQuaternion());
-    }
+  addBody() {
+    this.body = window.world.createRigidBody(
+      RAPIER.RigidBodyDesc.dynamic().setTranslation(-3, 3, 0)
+    );
+    this.collider = window.world.createCollider(
+      RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5),
+      this.body
+    );
+  }
+
+  updateBody() {
+    const position = this.body.translation()
+    const rotation = this.body.rotation()
+
+    this.position.set(position.x, position.y, position.z)
+    this.quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w)
   }
 
   create() { }

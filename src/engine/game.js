@@ -1,7 +1,6 @@
 import '../sass/style.scss'
 import * as THREE from 'three';
 import { setKeys } from './keys';
-import { world } from './world';
 
 export class Game {
 
@@ -16,7 +15,7 @@ export class Game {
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   }
 
-  create() {
+  async create() {
     window.addEventListener('resize', () => {
       this.currentScene.camera.aspect = window.innerWidth / window.innerHeight;
       this.currentScene.camera.updateProjectionMatrix();
@@ -28,7 +27,7 @@ export class Game {
 
   update(debug) {
     this.renderer.setAnimationLoop(() => {
-      world.step();
+      window.world.step();
       debug.update(this.currentScene);
       const dt = this.clock.getDelta();
 

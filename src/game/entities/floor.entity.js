@@ -11,11 +11,11 @@ export default class Floor extends Entity {
     this.geometry = new THREE.BoxGeometry(20, 0.1, 20);
     this.material = new THREE.MeshLambertMaterial({ color: 0xcccccc });
 
-    this.addBody({ size: [20, 0.1, 20], move: false });
+    this.addStaticBody(20, 0.1, 20);
   }
 
   update(dt) {
-    this.updateBody({});
+    this.updateBody();
   }
 
 
