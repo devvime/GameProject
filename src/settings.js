@@ -1,8 +1,12 @@
-import * as CANNON from 'cannon-es';
-
 export const settings = {
   debug: true,
   world: {
-    gravity: new CANNON.Vec3(0, -9.82, 0)
+    timestep: 1 / 60,
+    iterations: 8,
+    broadphase: 2,
+    worldscale: 1,
+    random: true,
+    info: false,
+    gravity: [0, -9.8, 0]
   }
 }

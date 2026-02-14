@@ -1,8 +1,7 @@
 import * as THREE from 'three';
-import * as CANNON from 'cannon-es';
-import { world } from './world';
 import Engine from './engine';
 import { LoadModel } from './loader';
+import { world } from './world';
 
 export default class Entity extends THREE.Mesh {
 
@@ -14,55 +13,45 @@ export default class Entity extends THREE.Mesh {
     super();
     this.receiveShadow = true;
     this.castShadow = true;
-    this.isGrounded = false;
-  }
-
-  addStaticBody(shape) {
-    this.body = new CANNON.Body({
-      type: CANNON.Body.STATIC,
-      shape
-    });
-    world.addBody(this.body);
-  }
-
-  addBody(options) {
-    this.body = new CANNON.Body(options);
-    world.addBody(this.body);
-  }
-
-  updateBody() {
-    this.position.copy(this.body.position);
-    this.quaternion.copy(this.body.quaternion);
-    this.checkGround();
-  }
-
-  updateStaticBody() {
-    this.body.position.copy(this.position);
-    this.body.quaternion.copy(this.quaternion);
+    this.isGrounded = true;
   }
 
   updateModel(y = 0) {
     if (!this.model) return;
-    this.updateBody();
     this.model.position.copy(this.position);
     this.model.quaternion.copy(this.quaternion);
     this.model.position.y = this.model.position.y - y
   }
 
-  checkGround() {
-    const from = this.body.position;
-    const to = new CANNON.Vec3(from.x, from.y - 1.1, from.z);
+  addBody({
+    type = 'box',
+    size = [1, 1, 1],
+    pos = [0, 0, 0],
+    rot = [0, 0, 0],
+    move = true,
+    density = 1,
+    friction = 0.2,
+    restitution = 0,
+    belongsTo = 1,
+    collidesWith = 0xffffffff
+  }) {
+    this.body = world.add({
+      type: type, // type of shape : sphere, box, cylinder 
+      size: size, // size of shape
+      pos: pos, // start position in degree
+      rot: rot, // start rotation in degree
+      move: move, // dynamic or statique
+      density: density,
+      friction: friction,
+      restitution: restitution,
+      belongsTo: belongsTo, // The bits of the collision groups to which the shape belongs.
+      collidesWith: collidesWith // The bits of the collision groups with which the shape collides.
+    });
+  }
 
-    const result = new CANNON.RaycastResult();
-
-    const hit = world.raycastClosest(from, to, {}, result);
-
-    if (hit) {
-      const normal = result.hitNormalWorld;
-      this.isGrounded = normal.y > 0.5;
-    } else {
-      this.isGrounded = false;
-    }
+  updateBody() {
+    this.position.copy(this.body.getPosition());
+    this.quaternion.copy(this.body.getQuaternion());
   }
 
   create() { }

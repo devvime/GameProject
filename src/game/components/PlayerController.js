@@ -47,7 +47,7 @@ export class PlayerController {
   }
 
   update(dt) {
-    this.movement(dt);
+    // this.movement(dt);
     this.animate(dt);
   }
 

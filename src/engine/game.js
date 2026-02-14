@@ -2,7 +2,6 @@ import '../sass/style.scss'
 import * as THREE from 'three';
 import { setKeys } from './keys';
 import { world } from './world';
-import Debug from './debug';
 
 export class Game {
 
@@ -29,7 +28,7 @@ export class Game {
 
   update(debug) {
     this.renderer.setAnimationLoop(() => {
-      world.fixedStep();
+      world.step();
       debug.update(this.currentScene);
       const dt = this.clock.getDelta();
 

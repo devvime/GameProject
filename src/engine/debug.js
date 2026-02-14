@@ -2,8 +2,6 @@ import THREEx3 from 'three-x3';
 import { settings } from '../settings';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import CannonDebugger from 'cannon-es-debugger';
-import { world } from './world';
 import Stats from 'three/addons/libs/stats.module.js';
 
 export default class Debug {
@@ -21,7 +19,6 @@ export default class Debug {
         renderer: engine.renderer,
         scene: engine.currentScene,
       }, { grid: false });
-      this.cannonDebugger = CannonDebugger(engine.currentScene, world);
       document.body.appendChild(this.stats.dom);
 
       this.add(engine.currentScene.sun)
@@ -33,7 +30,6 @@ export default class Debug {
     if (settings.debug && currentScene) {
       this.x3.tick();
       this.x3.fps(() => { });
-      this.cannonDebugger.update();
     }
   }
 

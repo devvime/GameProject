@@ -12,7 +12,7 @@ export default class MainScene extends Scene {
 
   create() {
     this.objects['floor'] = new Floor();
-    // this.objects['box'] = new Box();
+    this.objects['box'] = new Box();
     this.objects['soldier'] = new Soldier();
   }
 
