@@ -2,10 +2,10 @@ import { Game } from './game';
 import scenes from '../game/setScenes';
 import Debug from './debug';
 import { Loading } from './loading';
-
 export default class Engine {
 
   constructor() {
+    this.setMouseEvents();
     this.scenes = scenes;
     this.game = new Game();
     this.setScene('main');
@@ -45,6 +45,33 @@ export default class Engine {
       const entity = this.game.currentScene.objects[obj];
       this.debug.add(entity, { label: entity.name });
     }
+  }
+
+  setMouseEvents() {
+    this.mouseX = 0;
+    this.mouseY = 0;
+
+    document.body.addEventListener("click", () => {
+      document.body.requestPointerLock();
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (document.pointerLockElement !== document.body) return;
+
+      this.mouseX = e.movementX;
+      this.mouseY = e.movementY;
+
+      Engine.emit('MousePosition', { x: this.mouseX, y: this.mouseY });
+    });
+  }
+
+  static emit(name, data) {
+    const event = new CustomEvent(name, { detail: data });
+    document.dispatchEvent(event);
+  }
+
+  static output(name, callback) {
+    document.addEventListener(name, callback);
   }
 
 }

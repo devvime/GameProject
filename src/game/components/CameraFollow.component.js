@@ -25,6 +25,7 @@ export class CameraFollow {
 
     this.targetPos.add(this.rotatedOffset);
     this.camera.position.lerp(this.targetPos, this.smooth);
+
     this.lookTarget.copy(this.player.position);
     this.lookTarget.y += this.lookHeight;
     this.camera.lookAt(this.lookTarget);
