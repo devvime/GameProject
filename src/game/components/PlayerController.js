@@ -12,19 +12,19 @@ export class PlayerController {
   movement(dt) {
     if (!this.player.isGrounded) return;
     if (keys.w) {
-      this.player.body.velocity.z -= this.speed;
+      this.player.body.velocity.z = -this.speed;
     }
     if (keys.s) {
-      this.player.body.velocity.z += this.speed;
+      this.player.body.velocity.z = this.speed;
     }
     if (keys.a) {
-      this.player.body.velocity.x -= this.speed;
+      this.player.body.velocity.x = -this.speed;
     }
     if (keys.d) {
-      this.player.body.velocity.x += this.speed;
+      this.player.body.velocity.x = this.speed;
     }
     if (keys.spacebar) {
-      this.player.body.velocity.y += this.jumpForce;
+      this.player.body.velocity.y = this.jumpForce;
     }
   }
 

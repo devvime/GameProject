@@ -1,6 +1,7 @@
 import { Game } from './game';
 import scenes from '../game/setScenes';
 import Debug from './debug';
+import { Loading } from './loading';
 
 export default class Engine {
 
@@ -19,9 +20,13 @@ export default class Engine {
     return this.game;
   }
 
-  setScene(scene) {
+  async setScene(scene) {
     this.game.currentScene = new this.scenes[scene]();
     this.game.currentScene.create();
+
+    Loading.start();
+
+    await this.game.currentScene.create();
 
     for (const obj of Object.keys(this.game.currentScene.objects)) {
       const entity = this.game.currentScene.objects[obj];
@@ -29,6 +34,10 @@ export default class Engine {
       this.game.currentScene.add(entity);
       if (entity.create) entity.create();
     }
+
+    setTimeout(() => {
+      Loading.end();
+    }, 1000);
   }
 
   debugSceneObjects() {

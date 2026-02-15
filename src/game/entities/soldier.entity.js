@@ -12,18 +12,12 @@ export default class Soldier extends Entity {
     super();
   }
 
-  create() {
-    this.loadModel(
-      'public/Soldier.glb',
-      (model, anims) => this.setModel(model, anims)
-    );
-  }
-
-  setModel(model, anims) {
+  async create() {
+    const { model, animations } = await this.loadModel('src/assets/Soldier.glb');
     this.model = model;
-    this.game.currentScene.add(this.model);
-    this.animator = new Animator(this.model, anims);
     this.setBody();
+    this.game.currentScene.add(this.model);
+    this.animator = new Animator(this.model, animations);
     this.controller = new PlayerController(this);
   }
 

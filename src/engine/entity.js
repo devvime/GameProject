@@ -31,6 +31,7 @@ export default class Entity extends THREE.Mesh {
   }
 
   updateBody() {
+    if (!this.body) return;
     this.position.copy(this.body.position);
     this.quaternion.copy(this.body.quaternion);
     this.checkGround();
@@ -50,20 +51,44 @@ export default class Entity extends THREE.Mesh {
   }
 
   checkGround() {
-    const from = this.body.position;
-    const to = new CANNON.Vec3(from.x, from.y - 1.1, from.z);
+    const origin = this.body.position;
+    const radius = 0.20;
+    const rayLength = 1.15;
+    const offsets = [
+      [0, 0],           // centro
+      [radius, 0],     // direita
+      [-radius, 0],     // esquerda
+      [0, radius],     // frente
+      [0, -radius],     // trás
+    ];
 
-    const result = new CANNON.RaycastResult();
+    let grounded = false;
 
-    const hit = world.raycastClosest(from, to, {}, result);
+    for (const [ox, oz] of offsets) {
 
-    if (hit) {
-      const normal = result.hitNormalWorld;
-      this.isGrounded = normal.y > 0.5;
-    } else {
-      this.isGrounded = false;
+      const from = new CANNON.Vec3(
+        origin.x + ox,
+        origin.y,
+        origin.z + oz
+      );
+      const to = new CANNON.Vec3(
+        origin.x + ox,
+        origin.y - rayLength,
+        origin.z + oz
+      );
+      const result = new CANNON.RaycastResult();
+
+      if (world.raycastClosest(from, to, {}, result)) {
+        if (result.hitNormalWorld.y > 0.5) {
+          grounded = true;
+          break;
+        }
+      }
     }
+
+    this.isGrounded = grounded;
   }
+
 
   create() { }
 
