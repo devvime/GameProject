@@ -5,7 +5,7 @@ export class PlayerController {
   constructor(player) {
     this.player = player
     this.speed = 15;
-    this.jumpForce = 4;
+    this.jumpForce = 5;
   }
 
   movement(dt) {

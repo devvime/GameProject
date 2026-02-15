@@ -12,8 +12,8 @@ export default class MainScene extends Scene {
 
   create() {
     this.objects['floor'] = new Floor();
-    // this.objects['box'] = new Box();
-    this.objects['soldier'] = new Soldier();
+    this.objects['box'] = new Box();
+    // this.objects['soldier'] = new Soldier();
   }
 
   update(dt) { }

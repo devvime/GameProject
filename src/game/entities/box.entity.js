@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
 import Entity from '../../engine/entity';
+import { CharacterController } from '../../engine/CharacterController';
+import { InputController } from '../../engine/InputController';
 
 export default class Box extends Entity {
 
@@ -19,10 +21,20 @@ export default class Box extends Entity {
     });
 
     this.body.position.set(0, 1, 0);
+
+
+    // this.player = new CharacterController(this.body, {
+    //   speed: 7
+    // });
+
+    // this.input = new InputController(this.player);
   }
 
   update(dt) {
     this.updateBody();
+
+    // this.input.update()
+    // this.player.update(dt)
   }
 
 
