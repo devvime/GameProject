@@ -46,7 +46,7 @@ export default class Entity extends THREE.Mesh {
     if (!this.model) return;
     this.updateBody();
     this.model.position.copy(this.position);
-    this.model.quaternion.copy(this.quaternion);
+    // this.model.quaternion.copy(this.quaternion);
     this.model.position.y = this.model.position.y - y
   }
 

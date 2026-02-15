@@ -2,7 +2,6 @@ import '../sass/style.scss'
 import * as THREE from 'three';
 import { setKeys } from './keys';
 import { world } from './world';
-import Debug from './debug';
 
 export class Game {
 
@@ -29,9 +28,10 @@ export class Game {
 
   update(debug) {
     this.renderer.setAnimationLoop(() => {
-      world.fixedStep();
       debug.update(this.currentScene);
+
       const dt = this.clock.getDelta();
+      world.step(1 / 60, dt);
 
       for (const obj of Object.keys(this.currentScene.objects)) {
         const entity = this.currentScene.objects[obj];

@@ -9,9 +9,9 @@ export default class Floor extends Entity {
   constructor() {
     super();
 
-    this.geometry = new THREE.BoxGeometry(5, 0.2, 5);
+    this.geometry = new THREE.BoxGeometry(50, 0.2, 50);
     this.material = new THREE.MeshLambertMaterial({ color: 0xcccccc });
-    this.addStaticBody(new CANNON.Box(new CANNON.Vec3(2.5, 0.1, 2.5)));
+    this.addStaticBody(new CANNON.Box(new CANNON.Vec3(25, 0.1, 25)));
   }
 
   update(dt) {

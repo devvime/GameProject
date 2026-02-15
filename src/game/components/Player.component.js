@@ -4,8 +4,7 @@ export class PlayerController {
 
   constructor(player) {
     this.player = player
-
-    this.speed = 11;
+    this.speed = 15;
     this.jumpForce = 4;
   }
 
@@ -28,27 +27,8 @@ export class PlayerController {
     }
   }
 
-  animate(dt) {
-    if (!this.player.animator) return;
-    this.player.animator.update(dt);
-
-    // let anim = 'Fall';
-    let anim = 'Idle';
-
-    if (this.player.isGrounded) {
-      anim = 'Idle';
-
-      if (keys.w || keys.a || keys.s || keys.d) {
-        anim = 'Walk';
-      }
-    }
-
-    this.player.animator.play(anim);
-  }
-
   update(dt) {
     this.movement(dt);
-    this.animate(dt);
   }
 
 }
